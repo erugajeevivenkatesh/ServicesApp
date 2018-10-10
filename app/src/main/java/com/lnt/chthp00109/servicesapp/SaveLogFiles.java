@@ -80,5 +80,15 @@ public class SaveLogFiles  {
             Log.e(TAG, String.valueOf(Log.e(TAG,e.toString())));
         }
     }
+    public String Logfile()
+    {
+        String s="";
+        try {
+            s= String.valueOf(Runtime.getRuntime().exec(" logcat -t"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return s;
+    }
 
 }

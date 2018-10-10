@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     int Permission_All = 1;
-    //SaveLogFiles logFiles=new SaveLogFiles();
+    SaveLogFiles logFiles=new SaveLogFiles();
 
     private static final String TAG = MainActivity.class.getSimpleName();
     public SeekBar Ringervolume;
@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         Wifionof = findViewById(R.id.WifiOnofff);
         Batterylevel = findViewById(R.id.BatteryPercentage);
         volumecontrol();
+        Log.d(TAG,logFiles.Logfile());
+
         MainActivity.this.registerReceiver(broadcastReceiver,intentFilter);
         if (!hasPermissions(this, perimissions)) {
             ActivityCompat.requestPermissions(this, perimissions, Permission_All);
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void volumecontrol() {
-        // logFiles.Senddata(TAG+"Controlling Ringer volume");
+         logFiles.Senddata(TAG+"-->Controlling Ringer volume");
         try {
             Ringervolume = (SeekBar) findViewById(R.id.changeRinger);
             audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                     audioManager.setStreamVolume(AudioManager.STREAM_RING, progress, 0);
-//                    logFiles.Senddata(TAG+"changing Ringer volume");
+                logFiles.Senddata(TAG+"-->changing Ringer volume");
                 }
 
                 @Override
@@ -121,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                     bAdapter.disable();
                     Onstatus = false;
                     OnOfBluetooth.setImageResource(R.drawable.onbluetooth);
-                    //   logFiles.Senddata(TAG+"Bluetooth is off");
+                      logFiles.Senddata(TAG+"-->Bluetooth is off");
 
 
                     //Toast.makeText(MainActivity.this, "BlueTooth Turned OF", Toast.LENGTH_SHORT).show();
@@ -139,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                 if (wifi != null) {
                     WifiOnStatus = true;
                     wifi.setWifiEnabled(true);
-                    //         logFiles.Senddata(TAG+"Wifi Is on");
+                            logFiles.Senddata(TAG+"-->Wifi Is on");
                     Toast.makeText(this, "WifiisOn", Toast.LENGTH_SHORT).show();
                     Wifionof.setImageResource(R.drawable.wifionstatus);
 
@@ -147,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 WifiOnStatus = false;
                 Toast.makeText(this, "WifiisOf", Toast.LENGTH_SHORT).show();
-                //       logFiles.Senddata(TAG+"Wifi Is off");
+                     logFiles.Senddata(TAG+"-->Wifi Is off");
                 wifi.setWifiEnabled(false);
                 Wifionof.setImageResource(R.drawable.wifion);
             }
@@ -157,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void searchwifi(View view) {
-//        logFiles.Senddata(TAG+"Searching for Available Networks");
+       logFiles.Senddata(TAG+"-->Searching for Available Networks");
         try {
             WifiManager wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             if (wifi.isWifiEnabled()) {
@@ -171,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void SceduleActivity(View view) {
-        //      logFiles.Senddata(TAG+"Starting Sceduling Task Activity");
+        logFiles.Senddata(TAG+"-->Starting Sceduling Task Activity");
         startActivity(new Intent(getApplicationContext(), Sceduletask.class));
     }
 
@@ -182,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
         if (bAdapter.isEnabled()) {
             Intent inte = new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);
             startActivity(inte);
-//            logFiles.Senddata(TAG+"search near Bluetoth devices");
+            logFiles.Senddata(TAG+"-->search near Bluetoth devices");
 
         } else
             Toast.makeText(this, "Please Enable Bluetooth", Toast.LENGTH_SHORT).show();
@@ -214,13 +216,13 @@ public class MainActivity extends AppCompatActivity {
             int batteryLevel=(int)(((float)level / (float)scale) * 100.0f);
             if(deviceStatus == BatteryManager.BATTERY_STATUS_CHARGING){
                 Batterystatus="CHARGING";
-          //      logFiles.Senddata(TAG+"Batterystatus is charging");
+                logFiles.Senddata(TAG+"-->Batterystatus is charging");
                 Batterymode.setText(Batterystatus.toString());
                 Batterylevel.setText(String.valueOf(batteryLevel).concat("%"));
 
             }
             if(deviceStatus == BatteryManager.BATTERY_STATUS_DISCHARGING){
-        //        logFiles.Senddata(TAG+"bluetooth status discharging");
+                logFiles.Senddata(TAG+"-->Battery status discharging");
                 Batterystatus="DISCHARGING";
                 Batterymode.setText(Batterystatus.toString());
                 Batterylevel.setText(String.valueOf(batteryLevel).concat("%"));
@@ -229,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
             if (deviceStatus == BatteryManager.BATTERY_STATUS_FULL){
 
                 Batterystatus="BATTERY FULL";
-      //          logFiles.Senddata(TAG+"Batteryfull");
+               logFiles.Senddata(TAG+"-->Batteryfull");
 
                 Batterymode.setText(Batterystatus.toString());
                 Batterylevel.setText(String.valueOf(batteryLevel).concat("%"));

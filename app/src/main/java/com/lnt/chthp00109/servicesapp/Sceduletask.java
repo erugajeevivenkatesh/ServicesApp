@@ -60,7 +60,7 @@ public class Sceduletask extends AppCompatActivity {
     public void SetAlarm(View view) {
         Calendar calendar=Calendar.getInstance();
         if (android.os.Build.VERSION.SDK_INT >= 23) {
-            logFiles.Senddata(TAG+"Api level  >= 23!");
+            logFiles.Senddata(TAG+"-->Api level  >= 23!");
             calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
                     timePicker.getHour(), timePicker.getMinute(), 0);
             amorpm=timePicker.getHour()>=12?"PM":"AM";
@@ -69,7 +69,7 @@ public class Sceduletask extends AppCompatActivity {
                     timePicker.getHour())+":"+String.valueOf(timePicker.getMinute()<10?String.valueOf
                     ("0"+timePicker.getMinute()):timePicker.getMinute())+" "+amorpm;
         } else {
-           logFiles.Senddata(TAG+"API LESS THAN 23!");
+           logFiles.Senddata(TAG+"-->:API LESS THAN 23!");
 
             calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
                     timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 0);
@@ -84,7 +84,7 @@ public class Sceduletask extends AppCompatActivity {
         //getting the alarm manager
         // am.setTime(time);
         am.setRepeating(AlarmManager.RTC, time, AlarmManager.INTERVAL_DAY, pi);
-       logFiles.Senddata(TAG+"Alarmset using alarmmanager!");
+       logFiles.Senddata(TAG+"-->Alarmset using alarmmanager!");
         scdullertime.setText(s);
     }
     public void disablealarm( )
@@ -92,7 +92,7 @@ public class Sceduletask extends AppCompatActivity {
         if(am!=null) {
             am.cancel(pi);
             scdullertime.setText("--:--");
-            logFiles.Senddata(TAG+"Alarm Manager Disable or cancel alarm!");
+            logFiles.Senddata(TAG+"-->canceled alarm!");
 
             Log.d("SceduleTask", "Disable successfully");
         }

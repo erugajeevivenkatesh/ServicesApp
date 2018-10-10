@@ -22,7 +22,7 @@ public class MyAlarm extends BroadcastReceiver {
         //mediaPlayer.start();
         notificationManagerCompat=NotificationManagerCompat.from(context);
         Log.d("ALARM","Alaram is started");
-        logFiles.Senddata((TAG+"Alarm manager Start with Notification!"));
+        logFiles.Senddata((TAG+"-->Alarm manager Start with Notification!"));
 
         Notifications(context);
     }
