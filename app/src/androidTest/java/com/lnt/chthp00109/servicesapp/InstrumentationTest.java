@@ -41,16 +41,46 @@ public class InstrumentationTest   {
     {
         onView(withId(R.id.Batterystate)).check(matches(withText("CHARGING")));
     }
+    @Test
+    public void checksatusofdischarging()
+    {
+        onView(withId(R.id.Batterystate)).check(matches(withText("DISCHARGING")));
+    }
+    @Test
+    public void statusofchargingfull()
+    {
+        onView(withId(R.id.Batterystate)).check(matches(withText("BATTERY FULL")));
+    }
+
 
     @Test
     public void searchnearbuttonclikable()
     {
         onView(withId(R.id.WifiOnofff)).check(matches(isClickable()));
+       }
+    @Test
+    public void searchforWifibutton()
+    {
         onView(withId(R.id.searchnearwifi)).check(matches(isClickable()));
-        onView(withId(R.id.ScedulerTask)).check(matches(isClickable()));
-        onView(withId(R.id.Searchavailable)).check(matches(isClickable()));
+    }
+    @Test
+    public void onOffButtonclickble()
+    {
         onView(withId(R.id.Onofbluetooth)).check(matches(isClickable()));
     }
+
+    @Test
+    public void SearchAvailableButetooth()
+    {
+        onView(withId(R.id.Searchavailable)).check(matches(isClickable()));
+    }
+
+    @Test
+    public void ScedulerTaskbutton()
+    {onView(withId(R.id.ScedulerTask)).check(matches(isClickable()));
+    }
+
+
     @Test
     public void navigate()
     {   getActivityInstance();
