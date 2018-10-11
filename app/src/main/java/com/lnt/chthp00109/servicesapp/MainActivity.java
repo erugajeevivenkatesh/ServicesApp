@@ -2,6 +2,7 @@ package com.lnt.chthp00109.servicesapp;
 
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public Boolean permission = false;
 
     public static Boolean WifiOnStatus = false;
+ //   BluetoothManager
     IntentFilter intentFilter;
 
 
