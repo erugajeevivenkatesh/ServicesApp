@@ -34,22 +34,16 @@ public class IntentTests {
     public IntentsTestRule<MainActivity> mactivity = new IntentsTestRule<MainActivity>(MainActivity.class);
 
     @Test
-    public void IntentTestcaseforWifi() {
-        onView(withId(R.id.WifiOnofff)).perform(click());
-        onView(withId(R.id.searchnearwifi)).perform(click());
-        //  intended(allOf(hasAction(Settings.ACTION_BLUETOOTH_SETTINGS)));
-        intended(hasAction(Settings.ACTION_WIFI_SETTINGS));
-
-    }
-
-    @Test
-    public void bluetoothIntentTest() {
+    public void bluetoothIntentTest() throws Exception{
         onView(withId(R.id.Onofbluetooth)).perform(click());
         assertviewwithTextvisible(device,"ALLOW");
         //onView(withText("ALLOW")).perform(click());
         onView(withId(R.id.Searchavailable)).perform(click());
-        intended(hasAction(Settings.ACTION_BLUETOOTH_SETTINGS));
+       intended(hasAction(Settings.ACTION_BLUETOOTH_SETTINGS));
     }
+
+
+
 
     public static  void assertviewwithTextvisible(UiDevice device,String text)
     {

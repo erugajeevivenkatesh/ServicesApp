@@ -37,14 +37,15 @@ public class SaveLogFiles  {
 
             if(textfile.exists())
             {
-                Writedatatofile(textfile,Logdetails);
+                if(Writedatatofile(textfile,Logdetails))
                 Log.d(TAG,"writing the data is success");
                 Log.d(TAG,String.valueOf(textfile.length()));
             }
             else {
                 if (textfile.createNewFile()) {
                     Log.d(TAG, "successfully created Textfile");
-                    Writedatatofile(textfile,Logdetails);
+                    if(Writedatatofile(textfile,Logdetails))
+                        Log.d(TAG,"writing the data is success");
                 }
             }
 
@@ -57,8 +58,9 @@ public class SaveLogFiles  {
         }
 
 
-    } public void Writedatatofile(File textfile,String message)
-    {
+    }
+    public boolean Writedatatofile(File textfile,String message)
+    {   boolean data=false;
         try
         {
             if(textfile.length()/1024<200)
@@ -69,6 +71,7 @@ public class SaveLogFiles  {
                 bufferaWriter.write(message);
                 bufferaWriter.close();
                 fileWriter.close();
+                data=true;
             }
             else
             {
@@ -76,9 +79,10 @@ public class SaveLogFiles  {
             }
         }
         catch (IOException e)
-        {
+        {  data=false;
             Log.e(TAG, String.valueOf(Log.e(TAG,e.toString())));
         }
+        return data;
     }
     public String Logfile()
     {

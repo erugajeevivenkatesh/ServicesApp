@@ -15,18 +15,18 @@ public class MyAlarm extends BroadcastReceiver {
     SaveLogFiles logFiles=new SaveLogFiles();
     NotificationManagerCompat notificationManagerCompat;
     //  private static final String CHANNEL_ID ="Hi" ;
-
+        Context context;
     @Override
     public void onReceive(Context context, Intent intent) {
-        MediaPlayer mediaPlayer=MediaPlayer.create(context,Settings.System.DEFAULT_RINGTONE_URI);
+       // MediaPlayer mediaPlayer=MediaPlayer.create(context,Settings.System.DEFAULT_RINGTONE_URI);
         //mediaPlayer.start();
         notificationManagerCompat=NotificationManagerCompat.from(context);
         Log.d("ALARM","Alaram is started");
         logFiles.Senddata((TAG+"-->Alarm manager Start with Notification!"));
-
-        Notifications(context);
+        this.context=context;
+        Notifications();
     }
-    public void Notifications(Context context)
+    public void Notifications()
     {
       //  logFiles.Senddata(TAG+"Notification window is pop up!");
 
