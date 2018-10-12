@@ -13,13 +13,13 @@ import java.io.IOException;
 public class SaveLogFiles  {
     private static final String TAG=SaveLogFiles.class.getSimpleName();
     private static int Count=0;
-    private static  String ChangeableFilename="Log"+Count;
-
+    private   String ChangeableFilename="Log"+Count;
+   private String FileName=ChangeableFilename+".txt";
 
     public void Senddata(String Logdetails)
     {
         Log.i(TAG,Logdetails);
-        String FileName=ChangeableFilename+".txt";
+       // String FileName=ChangeableFilename+".txt";
         try {
             File fileroot = new File(
                     Environment.getExternalStorageDirectory().getAbsolutePath() + "/Venky");
@@ -76,6 +76,10 @@ public class SaveLogFiles  {
             else
             {
                 Count=Count+1;
+                ChangeableFilename="Log"+Count;
+                FileName=ChangeableFilename+".txt";
+                Log.d(TAG,"created file directory"+FileName.toString());
+                Log.d(TAG,String.valueOf(Count));
             }
         }
         catch (IOException e)
@@ -88,6 +92,7 @@ public class SaveLogFiles  {
     {
         String s="";
         try {
+
             s= String.valueOf(Runtime.getRuntime().exec(" logcat -t"));
         } catch (IOException e) {
             e.printStackTrace();

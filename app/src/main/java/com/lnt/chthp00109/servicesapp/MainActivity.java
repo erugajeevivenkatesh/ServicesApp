@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, perimissions, Permission_All);
         }
     }
+
     public void initializationadapters() {
         try {
             if (bAdapter.isEnabled())
@@ -214,6 +215,13 @@ public class MainActivity extends AppCompatActivity {
     {
        Log.e(TAG,e.toString());
     }
+}
+@Override
+protected  void onPause()
+{
+    super.onPause();
+    unregisterReceiver(broadcastReceiver);
+
 }
     @Override
     protected void onResume() {
