@@ -231,55 +231,54 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             deviceStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS,-1);
+
             int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
             int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-            int batteryLevel=(int)(((float)level / (float)scale) * 100.0f);
-            if(deviceStatus == BatteryManager.BATTERY_STATUS_CHARGING){
-                Batterystatus="CHARGING";
-                logFiles.Senddata(TAG+"-->Batterystatus is charging");
-                Batterymode.setText(Batterystatus.toString());
-                Batterylevel.setText(String.valueOf(batteryLevel).concat("%"));
-
-            }
-            if(deviceStatus == BatteryManager.BATTERY_STATUS_DISCHARGING){
-                logFiles.Senddata(TAG+"-->Battery status discharging");
-                Batterystatus="DISCHARGING";
-                Batterymode.setText(Batterystatus.toString());
-                Batterylevel.setText(String.valueOf(batteryLevel).concat("%"));
-            }
-            if (deviceStatus == BatteryManager.BATTERY_STATUS_FULL){
-                Batterystatus="BATTERY FULL";
-               logFiles.Senddata(TAG+"-->Batteryfull");
-                Batterymode.setText(Batterystatus.toString());
-                Batterylevel.setText(String.valueOf(batteryLevel).concat("%"));
-            }
-            if(deviceStatus == BatteryManager.BATTERY_STATUS_UNKNOWN){
-
-                Batterystatus="---";
-                Batterymode.setText(Batterystatus.toString());
-                Batterylevel.setText(String.valueOf(batteryLevel).concat("%"));
-            }
-
-            if (deviceStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING){
-                Batterystatus="NOT CHARGING";
-                Batterymode.setText(Batterystatus.toString());
-                Batterylevel.setText(String.valueOf(batteryLevel).concat("%"));
-            }
-
+            Devicestause(level,scale);
         }
     };
+    public void Devicestause(int level,int scale)
+    {   int batteryLevel=(int)(((float)level / (float)scale) * 100.0f);
+        if(deviceStatus == BatteryManager.BATTERY_STATUS_CHARGING){
+            Batterystatus="CHARGING";
+            logFiles.Senddata(TAG+"-->Batterystatus is charging");
+            Batterymode.setText(Batterystatus.toString());
+            Batterylevel.setText(String.valueOf(batteryLevel).concat("%"));
+
+        }
+        if(deviceStatus == BatteryManager.BATTERY_STATUS_DISCHARGING){
+            logFiles.Senddata(TAG+"-->Battery status discharging");
+            Batterystatus="DISCHARGING";
+            Batterymode.setText(Batterystatus.toString());
+            Batterylevel.setText(String.valueOf(batteryLevel).concat("%"));
+        }
+        if (deviceStatus == BatteryManager.BATTERY_STATUS_FULL){
+            Batterystatus="BATTERY FULL";
+            logFiles.Senddata(TAG+"-->Batteryfull");
+            Batterymode.setText(Batterystatus.toString());
+            Batterylevel.setText(String.valueOf(batteryLevel).concat("%"));
+        }
+        if(deviceStatus == BatteryManager.BATTERY_STATUS_UNKNOWN){
+
+            Batterystatus="---";
+            Batterymode.setText(Batterystatus.toString());
+            Batterylevel.setText(String.valueOf(batteryLevel).concat("%"));
+        }
+
+        if (deviceStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING){
+            Batterystatus="NOT CHARGING";
+            Batterymode.setText(Batterystatus.toString());
+            Batterylevel.setText(String.valueOf(batteryLevel).concat("%"));
+        }
+
+
+    }
+
     public String Heloo(String h)
     {
         return h;
     }
-    public int How()
-    {
-        return 34;
-    }
-    public int add(int a,int b)
-    {
-        return a+b;
-    }
+
 
 
 

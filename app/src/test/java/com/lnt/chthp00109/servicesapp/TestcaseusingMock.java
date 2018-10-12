@@ -119,10 +119,12 @@ public class TestcaseusingMock {
         doThrow(IllegalStateException.class).when(mainActivity).BluetoothOnofffunction();
         mainActivity.BluetoothOnofffunction();
     }
-
-
-
-
-
+    @Test(expected = IllegalStateException.class)
+    public  void TestDevicestatus()
+    {
+        MainActivity mainActivity=mock(MainActivity.class);
+        doThrow(IllegalStateException.class).when(mainActivity).Devicestause(anyInt(),anyInt());
+        mainActivity.Devicestause(45,34);
+    }
 
 }
