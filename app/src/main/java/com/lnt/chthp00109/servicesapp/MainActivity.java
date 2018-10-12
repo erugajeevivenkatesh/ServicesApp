@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     public SeekBar Ringervolume;
     AudioManager audioManager;
-    final BluetoothAdapter bAdapter = BluetoothAdapter.getDefaultAdapter();
+    public BluetoothAdapter bAdapter = BluetoothAdapter.getDefaultAdapter();
     TextView Batterymode, Batterylevel;
     ImageButton OnOfBluetooth, Wifionof;
     String Batterystatus = "";
@@ -60,11 +60,24 @@ public class MainActivity extends AppCompatActivity {
         Wifionof = findViewById(R.id.WifiOnofff);
         Batterylevel = findViewById(R.id.BatteryPercentage);
         volumecontrol();
+        initializationadapters();
         Log.d(TAG,logFiles.Logfile());
-
+        String hio=Heloo("hi");
         MainActivity.this.registerReceiver(broadcastReceiver,intentFilter);
         if (!hasPermissions(this, perimissions)) {
             ActivityCompat.requestPermissions(this, perimissions, Permission_All);
+        }
+    }
+    public void initializationadapters() {
+        try {
+            if (bAdapter.isEnabled())
+                bAdapter.disable();
+            WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+            if (wifiManager.isWifiEnabled())
+                wifiManager.setWifiEnabled(false);
+        } catch (NullPointerException e)
+        {   Log.e(TAG,e.toString());
+            logFiles.Senddata(TAG + "Error--->"+e.toString());
         }
     }
 
@@ -97,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
                 public void onStartTrackingTouch(SeekBar seekBar) {
 
                 }
-
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
 
@@ -109,6 +121,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void OnBluetoooth(View view) {
+        BluetoothOnofffunction();
+    }
+    public void BluetoothOnofffunction()
+    {
         try {
             if (bAdapter == null) {
                 Toast.makeText(MainActivity.this, "BlueTooth Not supported", Toast.LENGTH_SHORT).show();
@@ -125,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                     bAdapter.disable();
                     Onstatus = false;
                     OnOfBluetooth.setImageResource(R.drawable.onbluetooth);
-                      logFiles.Senddata(TAG+"-->Bluetooth is off");
+                    logFiles.Senddata(TAG+"-->Bluetooth is off");
 
 
                     //Toast.makeText(MainActivity.this, "BlueTooth Turned OF", Toast.LENGTH_SHORT).show();
@@ -135,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
             Log.e(TAG, e.toString());
         }
     }
+
 
     public void WifiOn(View view) {
         try {
@@ -161,7 +178,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void searchwifi(View view) {
-       logFiles.Senddata(TAG+"-->Searching for Available Networks");
+        try {
+            SearchWifimethod();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void SearchWifimethod() throws Exception
+    {
+        logFiles.Senddata(TAG+"-->Searching for Available Networks");
         try {
             WifiManager wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             if (wifi.isWifiEnabled()) {
@@ -174,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     public void SceduleActivity(View view) {
         logFiles.Senddata(TAG+"-->Starting Sceduling Task Activity");
         startActivity(new Intent(getApplicationContext(), Sceduletask.class));
@@ -181,16 +207,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void SerchNearBlueTooth(View view) {
         try {
-
-
-        if (bAdapter.isEnabled()) {
             Intent inte = new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);
             startActivity(inte);
             logFiles.Senddata(TAG+"-->search near Bluetoth devices");
-
-        } else
-            Toast.makeText(this, "Please Enable Bluetooth", Toast.LENGTH_SHORT).show();
-    }catch(NullPointerException e)
+        }catch(NullPointerException e)
     {
        Log.e(TAG,e.toString());
     }
@@ -202,11 +222,9 @@ public class MainActivity extends AppCompatActivity {
         {
             Onstatus = true;
             OnOfBluetooth.setImageResource(R.drawable.sharebluetooth);
-
         }
         else {
             OnOfBluetooth.setImageResource(R.drawable.onbluetooth);
-
         }
     }
     private BroadcastReceiver broadcastReceiver=new BroadcastReceiver() {
@@ -228,16 +246,12 @@ public class MainActivity extends AppCompatActivity {
                 Batterystatus="DISCHARGING";
                 Batterymode.setText(Batterystatus.toString());
                 Batterylevel.setText(String.valueOf(batteryLevel).concat("%"));
-
             }
             if (deviceStatus == BatteryManager.BATTERY_STATUS_FULL){
-
                 Batterystatus="BATTERY FULL";
                logFiles.Senddata(TAG+"-->Batteryfull");
-
                 Batterymode.setText(Batterystatus.toString());
                 Batterylevel.setText(String.valueOf(batteryLevel).concat("%"));
-
             }
             if(deviceStatus == BatteryManager.BATTERY_STATUS_UNKNOWN){
 
@@ -254,6 +268,19 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
+    public String Heloo(String h)
+    {
+        return h;
+    }
+    public int How()
+    {
+        return 34;
+    }
+    public int add(int a,int b)
+    {
+        return a+b;
+    }
+
 
 
 
