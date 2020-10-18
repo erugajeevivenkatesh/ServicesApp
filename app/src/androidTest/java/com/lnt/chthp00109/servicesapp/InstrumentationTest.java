@@ -107,6 +107,7 @@ public class InstrumentationTest   {
         return activities[0];
     }
     @Before
+    // getPermission() will use to ask permission from user for access storage, location.
     public void grantPermissions()
     {
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M)
